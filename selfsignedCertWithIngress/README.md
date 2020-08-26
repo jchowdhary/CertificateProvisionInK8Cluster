@@ -3,5 +3,7 @@ In this section, We will see you how we can  leverage K8 Ingress and we can laun
 
 ## Step 1: Launch minikube cluster with addons Ingress.
 Check whether the minikube Ingress is enabled by default. Type 'minikube addons list', 
+![minikube addon list](https://github.com/jchowdhary/k8IngressWithCerts/tree/master/selfsignedCertWithIngress/minikube_addon_list.jpg)
+
 an use any kubernetes deployment, Here..I have taken the kubernetes deployment from open source project from https://github.com/DickChesterwood/k8s-fleetman.
 Pl. see the artifact
