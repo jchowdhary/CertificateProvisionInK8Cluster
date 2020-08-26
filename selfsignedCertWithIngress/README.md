@@ -1,4 +1,7 @@
-In this section, I will show you how you can leverage K8 Ingress and how you can add a self signed certificate and deploy your kubernetes application in HTTPS.
+# LaunchK8 Application in Minikube using K8 Ingress and Self Signed Certificate
+In this section, We will see you how we can  leverage K8 Ingress and we can launch our kubernetes application in minicluster using a self signed certificate.
 
-Step 1. You can use any kubernetes deployment, Here..I have taken the kubernetes deployment from open source project from https://github.com/DickChesterwood/k8s-fleetman.
+## Step 1: Launch minikube cluster with addons Ingress.
+Check whether the minikube Ingress is enabled by default. Type 'minikube addons list', 
+an use any kubernetes deployment, Here..I have taken the kubernetes deployment from open source project from https://github.com/DickChesterwood/k8s-fleetman.
 Pl. see the artifact
