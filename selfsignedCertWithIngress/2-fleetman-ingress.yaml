@@ -1,0 +1,24 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: fleetman-ingress
+  namespace: default
+spec:
+  rules:
+  - host: fleetman-webapp.com
+    http:
+      paths:
+      - backend:
+          serviceName: fleetman-webapp
+          servicePort: 80
+#        path: /
+  tls:
+  - hosts:
+    - fleetman-webapp.com
+    secretName: fleetman-webapp-secret
