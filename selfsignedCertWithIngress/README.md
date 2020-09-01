@@ -18,7 +18,7 @@ We see that fleetman-webapp service has ClusterIP configured, so we can expose t
 We create an Kubernetes Ingress YAML file which will configure the backend service and port. The Ingress external IP will be the same as `minikube ip`. We have given a DNS name "fleetman-webapp.com" here. Update the hosts file `\etc\hosts\`  with the IP{same as minikube ip} and this DNS{fleetman-webapp.com} name.
 
 Specify the backend service name and service  port properly.
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/k8Ingress.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/k8Ingress.JPG)
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/K8Ingress.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/K8Ingress.JPG)
 
 ## Step 4: Launch the K8 Ingress
 Exceute the command `kubectl apply -f 2-fleetman-ingress.yaml`. Once done,pl. launch your browser and open the URL `http://fleetman-webapp.com`.This will launch your application in your browser.
