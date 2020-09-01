@@ -25,5 +25,37 @@ NB: Specify the backend service name and service  port properly.
 Exceute the command `kubectl apply -f 2-fleetman-ingress.yaml`. Once done,pl. launch your browser and open the URL `http://fleetman-webapp.com`.This will launch your application in your browser.
 
 ## Step 5: Configure HTTPS with Self Signed Certificate.
+We need to run our application in a trusted mode, so we would need certificates.. In this example, we will understand how we can create self signed certificates and how we manually use the certificate in our kubernetes application and launch our application in a secured TLS channel.
+
+## Step 6: Create a Self Signed certificate using OpenSSL
+We would be using OpenSSL to create a self signed certificate. If you do not have OpenSSL, you can download it from https://www.openssl.org/source/.
+`openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fleetman.key -out fleetman.crt -subj '//CN=fleetman-webapp.com' -days 365`
+Pl. execute the above command to create <i>fleetman.key</i> and <i>fleetman.crt</i>. You can find the same attached with this artifact as well.
+
+## Step 7: Create a Kubernetes TLS secret from the self signed certificate and key.
+Kubernetes save the secret credentials in K8 Secret. Here in this example,we will create a TLS secret and configure in our minikube kubernetes cluster.
+Execute the command, `kubectl create secret tls fleetman-webapp-secret --cert=fleetman.crt --key=fleetman.key`
+This will create a secret named as <i> fleetman-webapp-secret </i>. You can confirm the secret by typing `kubectl get secret -o yaml`. This will dump out all the certificate related information, token string, certificate metadata information, public key, signed encrypted algorithm details.
+
+## Step 8: Configure the K8 Ingress to work with K8 secret to launch the application in HTTPS
+Once, the secret is created, we need to configure our existing Ingress(<i> fleetman-ingress.yaml </i> so that application can listen in 443 secured port.
+We need to edit our existing yaml by introducing the below lines.
+
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/Ingress.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/Ingress.JPG)
+
+If you see the screenshot above, we have mentioned <i> fleetman-webapp-secret </i> in the <i> <tls>..</i> section.Once changes are done, execute
+`kubectl apply -f fleetman-ingress.yaml ` to apply the Ingress in our minikube cluster.
+  
+## Step 9. Launch your application in the browser.
+Launch the browser and open the url <i> https://fleetman-webapp.com </i>. You will see your Kubernetes Application is launched in HTTPs mode.
+
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/kubernetesApp.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/kubernetesApp.JPG)
+
+In this example, we have seen how we can manually introduce a self signed certificate in our Kubernetes Application.
+
+In the upcoming section,we will see how we can automate certificate provisioing using self signed certificate and CA Root Let's Encrypt using CertManager.
+
+
+
 
 Point 
