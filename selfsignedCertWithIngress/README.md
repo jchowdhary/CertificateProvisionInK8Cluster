@@ -5,6 +5,16 @@ In this section, We will see you how we can  leverage K8 Ingress and we can laun
 Check whether the minikube Ingress is enabled by default. Type `minikube addons list`, 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG)
 
-If they are not enabled by default,execute this command `minikube addons enable ingress`
-an use any kubernetes deployment, Here..I have taken the kubernetes deployment from open source project from https://github.com/DickChesterwood/k8s-fleetman.
+If they are not enabled by default,execute this command `minikube addons enable ingress`. This will enable the minikube Ingress when minikube starts.
+Start your minikube cluster.
+
+## Step 2: Launch your K8 Application
+In this example,we have taken an open source kubernetes application from Richard Chesterwood site.Pl. refer the open source project from https://github.com/DickChesterwood/k8s-fleetman. We launch this application using the kubectl command `kubectl apply -f 1-application-no-istio.yaml`. This yaml deployment will launch fleetman-webapp pods and services.
+You can see the screen what all workloads and services are launched by this YAML.
+
+We see that fleetman-webapp service has ClusterIP configured, so we can expose the endpoint to outside world. We will use Kubernetes Ingress which is packaged with our minikube cluster.
+
+## Step 3: Configure your K8 Ingress
+We create an Kubernetes Ingress YAML file which will configure the backend service and port. The Ingress external IP will be the same as `minikube ip`. We have given a DNS name "fleetman-webapp.com" and update the \etc\hosts\ file with the IP and this DNS name.
+
 Pl. see the artifact
