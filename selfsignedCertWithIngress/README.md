@@ -55,7 +55,3 @@ In this example, we have seen how we can manually introduce a self signed certif
 
 In the upcoming section,we will see how we can automate certificate provisioing using self signed certificate and CA Root Let's Encrypt using CertManager.
 
-
-
-
-Point 
