@@ -1,6 +1,6 @@
-# k8IngressWithCerts
-In this repo, I will describe how we can use certificates with Kubernetes Ingress. Here,I will describe the below things
-1. How we can migrate our K8 application deployment from HTTP to HTTPS using a self signed certificate.
-2. How we can auto renew the expired self signed certificates in K8 deployment without downtime.
-3. How we can auto renew CA root certificate in K8 Deployment using Cert-Manager without downtime.
-4. How we can leverage certificates from Cloud Vendor.
+## k8IngressWithCerts
+W have seen in our Devops meetup, we had discussion on using certificates in Kubernetes Application.So,I will start this journey of explaining how we can use certificate for our kubernetes application.First Topic,I would be doing is using certificates in our Kubernetes enviornment for local setup... 
+
+Pl. see the <i> selfsignedCertWithIngress </i> for documentation and its usage.
+
+Once done, we would grow our learning and see how we can do in real world later..
