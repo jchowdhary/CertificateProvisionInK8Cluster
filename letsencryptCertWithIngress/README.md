@@ -19,7 +19,7 @@ Since, we need to launch the application externally, we would be using Nginx Ing
 
 From your CLI, type '`kubectl apply -f fleetman-ingress-nginxcontroller.yaml` and enter. As per the screenshot below, we will create an Ingress. As of now, we did not define the `TLS` tag yet..We can verify sucessfull Ingress creation by entering `kubectl get ing` in the CLI prompt.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.JPG)
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg)
 
 NB: Specify the backend service name and service  port properly.
 
