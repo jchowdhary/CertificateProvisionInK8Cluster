@@ -37,7 +37,17 @@ We would use a 3rd party utility i.e. Cert-Manager to issue CA signed certificat
 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/high-level-overview.svg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/high-level-overview.svg)
 
-## Step 6: Create a Self Signed certificate using OpenSSL
+## Step 6: Configure Cert Manager and Install ClusterIssuer
+All resources (the CustomResourceDefinitions, cert-manager, namespace, and the webhook component) are included in a single YAML manifest file. 
+Install the CustomResourceDefinitions and cert-manager itself:
+`<code>
+# Kubernetes 1.16+
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.1/cert-manager.yaml
+
+# Kubernetes <1.16
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.1/cert-manager-legacy.yaml 
+</code>`
+
 We would be using OpenSSL to create a self signed certificate. If you do not have OpenSSL, you can download it from https://www.openssl.org/source/.
 `openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fleetman.key -out fleetman.crt -subj '//CN=fleetman-webapp.com' -days 365`
 Pl. execute the above command to create <i>fleetman.key</i> and <i>fleetman.crt</i>. You can find the same attached with this artifact as well.
