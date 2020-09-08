@@ -14,14 +14,16 @@ You can see the screen what all workloads and services are launched by this YAML
 
 We see that fleetman-webapp service has ClusterIP configured, so we can expose the endpoint to outside world. We will use Kubernetes Ingress which is packaged with our minikube cluster.
 
-## Step 3: Configure your Nginx Ingress Controller
-Since, we need to launch the application externally, we would be using Nginx Ingress Controller here. This Nginx Ingress Controller will program a front-end Load Balancer to enable Ingress Configurations.First, we would launch the Ingress Resource and then apply the Nginx Ingress Controller on it.We create an Kubernetes Ingress Controller YAML file which will configure the backend service and port. The Ingress external IP will be the same as `minikube ip`. We have given a DNS name "fleetman-webapp.com" here. Update the hosts file `\etc\hosts\`  with the IP{same as minikube ip} and this DNS{fleetman-webapp.com} name.
+## Step 3: Launch your Ingress
+Since, we need to launch the application externally, we would be using Nginx Ingress Controller here. This Nginx Ingress Controller will program a front-end Load Balancer to enable Ingress Configurations.First, we would launch the Ingress Resource and then apply the Nginx Ingress Controller on it.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/K8Ingress.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/K8Ingress.JPG)
+From your CLI, type '`kubectl apply -f fleetman-ingress-nginxcontroller.yaml` and enter. As per the screenshot below, we will create an Ingress. As of now, we did not define the `TLS` tag yet..We can verify sucessfull Ingress creation by entering `kubectl get ing` in the CLI prompt.
+
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.JPG)
 
 NB: Specify the backend service name and service  port properly.
 
-## Step 4: Launch the K8 Ingress
+## Step 4: Configure NGINX Ingress Controller and Check the External IP in K8 Ingress
 Exceute the command `kubectl apply -f 2-fleetman-ingress.yaml`. Once done,pl. launch your browser and open the URL `http://fleetman-webapp.com`.This will launch your application in your browser.
 
 ## Step 5: Configure HTTPS with Self Signed Certificate.
