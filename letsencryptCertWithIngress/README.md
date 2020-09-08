@@ -28,8 +28,7 @@ Execute the command `kubectl apply -f ingress-nginx-controller.yaml`. This will 
 
 Once sucessfully done,pl. revisit and verify the Ingress external IP now.. As per the screesnhot below,you can see `Address` section updated with an external IP.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG)
-
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG)</br>
 <i>NB:In your cloud enviornment, this IP is a external IP which can be accessed from outside the cluster. So,we can be reserve this IP and give a DNS name. Since, we are doing in minikube, we will not be doing anything here with the host file as we did with the manual provisioing of certificate example.one in the last example as we would want this application to be accessed externally from anywhere.Here, we will use an utility called NGROK i.e. https://ngrok.com/ </i>
 
 ## Step 5: Download Cert-Manager Certificate Issuer
@@ -40,13 +39,18 @@ We would use a 3rd party utility i.e. Cert-Manager to issue CA signed certificat
 ## Step 6: Configure Cert Manager and Install ClusterIssuer
 All resources (the CustomResourceDefinitions, cert-manager, namespace, and the webhook component) are included in a single YAML manifest file. 
 Install the CustomResourceDefinitions and cert-manager itself:
-`<code>
+<code>
 # Kubernetes 1.16+
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.1/cert-manager.yaml
 
 # Kubernetes <1.16
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.1/cert-manager-legacy.yaml 
-</code>`
+</code>
+
+Once done, pl.check the `namespaces` created in the kubernetes cluster. Execute `kubectl get ns`, you might find something like below screenshot.
+You will see namespaces like `cert-manager`,`nginx-ingress` with the other namespaces.
+
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG)
 
 We would be using OpenSSL to create a self signed certificate. If you do not have OpenSSL, you can download it from https://www.openssl.org/source/.
 `openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fleetman.key -out fleetman.crt -subj '//CN=fleetman-webapp.com' -days 365`
