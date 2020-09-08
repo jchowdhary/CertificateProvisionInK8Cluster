@@ -30,12 +30,12 @@ Once sucessfully done,pl. revisit and verify the Ingress external IP now.. As pe
 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG)
 
-<i>NB:In your cloud enviornment, this IP is a external IP which can be accessed from outside the cluster. So,we can be reserve this IP and give a DNS name. Since, we are doing in minikube, we will not be doing anything here with the host file as one in the last example as we would want this application to be accessed externally from anywhere.Here, we will use an utility called NGROK i.e. https://ngrok.com/ </i>
+<i>NB:In your cloud enviornment, this IP is a external IP which can be accessed from outside the cluster. So,we can be reserve this IP and give a DNS name. Since, we are doing in minikube, we will not be doing anything here with the host file as we did with the manual provisioing of certificate example.one in the last example as we would want this application to be accessed externally from anywhere.Here, we will use an utility called NGROK i.e. https://ngrok.com/ </i>
 
-launch your browser and open the URL `http://fleetman-webapp.com`.This will launch your application in your browser.
+## Step 5: Download Cert-Manager Certificate Issuer
+We would use a 3rd party utility i.e. Cert-Manager to issue CA signed certificates. Pl. visit https://github.com/jetstack/cert-manager. This is a very useful tool from where we can generate certificates for Staging, Production and also use Vaults as well. In this example, we are using Let's Encrypt Staging certificate for our application. This Cert-Manager will automatically provision your certificates and secrets. We need not worry anymore for expired certificates and only self signed certificates.
 
-## Step 5: Configure HTTPS with Self Signed Certificate.
-We need to run our application in a trusted mode, so we would need certificates.. In this example, we will understand how we can create self signed certificates and how we manually use the certificate in our kubernetes application and launch our application in a secured TLS channel.
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/high-level-overview.svg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/high-level-overview.svg)
 
 ## Step 6: Create a Self Signed certificate using OpenSSL
 We would be using OpenSSL to create a self signed certificate. If you do not have OpenSSL, you can download it from https://www.openssl.org/source/.
