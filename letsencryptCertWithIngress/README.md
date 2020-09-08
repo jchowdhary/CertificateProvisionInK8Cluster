@@ -38,17 +38,16 @@ We would use a 3rd party utility i.e. Cert-Manager to issue CA signed certificat
 
 ## Step 6: Configure Cert Manager and Install ClusterIssuer
 All resources (the CustomResourceDefinitions, cert-manager, namespace, and the webhook component) are included in a single YAML manifest file. 
-Install the CustomResourceDefinitions and cert-manager itself:
-<code>
-# Kubernetes 1.16+
+Install the CustomResourceDefinitions and cert-manager itself:<code>
+<i> For Kubernetes 1.16+ </i>
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.1/cert-manager.yaml
 
-# Kubernetes <1.16
+<i> For Kubernetes <1.16 </i>
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.1/cert-manager-legacy.yaml 
 </code>
 
 Once done, pl.check the `namespaces` created in the kubernetes cluster. Execute `kubectl get ns`, you might find something like below screenshot.
-You will see namespaces like `cert-manager`,`nginx-ingress` with the other namespaces.
+You will see namespaces like `cert-manager`,`ingress-nginx` with the other namespaces.
 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG)
 
