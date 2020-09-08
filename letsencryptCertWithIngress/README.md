@@ -21,15 +21,16 @@ From your CLI, type '`kubectl apply -f fleetman-ingress-nginxcontroller.yaml` an
 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg)
 
-NB: Specify the backend service name and service  port properly.Also,ignore the `annotation` metadata tag with cert-manager, we will revisit it later.
+<i>NB: Specify the backend service name and service  port properly.Also,ignore the `annotation` metadata tag with cert-manager, we will revisit it later.</i>
 
 ## Step 4: Configure NGINX Ingress Controller and Check the External IP in K8 Ingress
 Execute the command `kubectl apply -f ingress-nginx-controller.yaml`. This will configure the kubernetes cluster with `ingress-nginx` namespace, configmaps, clusterrolebinding, rolebindings,serviceaccounts and deployments. You can find the YAML from https://www.nginx.com/products/nginx/kubernetes-ingress-controller/
 
 Once sucessfully done,pl. revisit and verify the Ingress external IP now.. As per the screesnhot below,you can see `Address` section updated with an external IP.
+
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG)
 
-NB:<i>In your cloud enviornment, this IP is a external IP which can be accessed from outside the cluster. So,we can be reserve this IP and give a DNS name. Since, we are doing in minikube, we will not be doing anything here with the host file as one in the last example as we would want this application to be accessed externally from anywhere.Here, we will use an utility called NGROK i.e. https://ngrok.com/ </i>
+<i>NB:In your cloud enviornment, this IP is a external IP which can be accessed from outside the cluster. So,we can be reserve this IP and give a DNS name. Since, we are doing in minikube, we will not be doing anything here with the host file as one in the last example as we would want this application to be accessed externally from anywhere.Here, we will use an utility called NGROK i.e. https://ngrok.com/ </i>
 
 launch your browser and open the URL `http://fleetman-webapp.com`.This will launch your application in your browser.
 
