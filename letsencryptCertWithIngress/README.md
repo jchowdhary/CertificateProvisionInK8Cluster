@@ -1,5 +1,5 @@
-# LaunchK8 Application in Minikube using K8 Ingress and Self Signed Certificate
-In this section, We will see you how we can  leverage K8 Ingress and we can launch our kubernetes application in minicluster using a self signed certificate.
+# LaunchK8 Application in Minikube using Lets Encrypt CA signed Certificate Using CertManager 
+In this section, We will create the workable solution on how we can automatically provision Let's Encrypt CA signed certifcates on our Kubernetes Cluster. To simplify things, we will workout this example inside a Minikube..However, you can leverage this example in any Kubernetes Cluster in any cloud vendor.
 
 ## Step 1: Launch minikube cluster with addons Ingress.
 Check whether the minikube Ingress is enabled by default. Type `minikube addons list`, 
