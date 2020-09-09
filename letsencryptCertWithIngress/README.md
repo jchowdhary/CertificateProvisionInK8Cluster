@@ -66,7 +66,14 @@ NB: We see that as per my NGROK capture , host name is coming as <i>fbe0de55e3bf
 
 ## Step 8: Launch ClusterIssuer from CertManager.
 Execute, `kubectl apply -f fleetman-clusterissuer-certmanager.yaml`. This will automatically provision Let's Encrypt Staging certificate and also kubernetes secret as well.
-If you describe your certificate you will see 
+If you describe your certificate you will see `fleetman-webapp-secret` certificate is created and also a Kubernetes Secret with the same name.
+
+In my lab,when i describe my certificate and secret which are automatically provisioned,i get the below screenshot
+
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert1.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert1.jpg)
+
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert2.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert2.jpg)
+
 
 We would be using OpenSSL to create a self signed certificate. If you do not have OpenSSL, you can download it from https://www.openssl.org/source/.
 `openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fleetman.key -out fleetman.crt -subj '//CN=fleetman-webapp.com' -days 365`
