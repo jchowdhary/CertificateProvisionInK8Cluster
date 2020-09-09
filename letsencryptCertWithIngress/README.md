@@ -60,7 +60,7 @@ Install NGROK from https://ngrok.com/ and execute the command, `NGROK http <Addr
 
 Now,update the Ingress with the below changes and apply the command `kubectl apply -f fleetman-ingress-nginxcontroller.yaml`.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhttp_ingress.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhttp_ingress.jpg)
+![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg)
 
 
 
