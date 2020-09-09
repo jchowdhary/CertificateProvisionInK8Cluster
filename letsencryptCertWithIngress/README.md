@@ -49,7 +49,7 @@ You will see namespaces like `cert-manager`,`ingress-nginx` with the other names
 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG)
 
-Once cert-manager has been deployed, you must configure Issuer or ClusterIssuer resources which represent certificate authorities.Issuer can work in multiple clusters and ClusterIssuer works in the specific cluster where it is deployed. This will be created in the cert-manager namespace.
+Once cert-manager has been deployed, you must configure Issuer or ClusterIssuer resources which represent certificate authorities.Issuer can work in multiple clusters and ClusterIssuer works in the specific cluster where it is deployed. This will be created in the cert-manager namespace. We will see in Step 8.
 
 ## Step 7: Execute NGROK for tunneling Ingress
 We have already seen that Kuberntes Ingress when described , it outputs external IP. In a real Cloud world,this IP should have been reserved and given a DNS name so that it is available to external world. For Minikube, we can use NGROK so that local IP can be tunnelled to external world and we can reference the IP in the Let's Encrypt Certificate Issuance. NGROK will make to believe the Let's Encrypt that this DNS really exists and hence we get the CA signed certificate.
@@ -58,16 +58,15 @@ Install NGROK from https://ngrok.com/ and execute the command, `NGROK http <Addr
 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrok_capture.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrok_capture.jpg)
 
-Now,update the Ingress with the below changes and apply the command `kubectl apply -f fleetman-ingress-nginxcontroller.yaml`.
+Now,update the Ingress YAML file with the below TLS ,HOST and secret name information and apply the command `kubectl apply -f fleetman-ingress-nginxcontroller.yaml`.
 
 ![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg)
 
+NB: We see that as per my NGROK capture , host name is coming as <i>fbe0de55e3bf.ngrok.io</i>. But this will be different when you execute ngrok.We also see that we have given a random secret name <i>fleetman-webapp-secret</i>.But at this point, there is no certificate and secret created.
 
-
-Execute `NGROK 
-Update your Kuberntes Ingress YAML so that it should have a <code> TLS </code> with the host information and also a secret name. For the time being, you can put any `host` name.
-
+## Step 8: Launch ClusterIssuer from CertManager.
 Execute, `kubectl apply -f fleetman-clusterissuer-certmanager.yaml`. This will automatically provision Let's Encrypt Staging certificate and also kubernetes secret as well.
+If you describe your certificate you will see 
 
 We would be using OpenSSL to create a self signed certificate. If you do not have OpenSSL, you can download it from https://www.openssl.org/source/.
 `openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fleetman.key -out fleetman.crt -subj '//CN=fleetman-webapp.com' -days 365`
