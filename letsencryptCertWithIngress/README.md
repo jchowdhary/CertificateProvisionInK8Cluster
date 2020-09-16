@@ -3,7 +3,7 @@ In this section, We will create the workable solution on how we can automaticall
 
 ## Step 1: Launch minikube cluster with addons Ingress.
 Check whether the minikube Ingress is enabled by default. Type `minikube addons list`, 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG)
 
 If they are not enabled by default,execute this command `minikube addons enable ingress`. This will enable the minikube Ingress when minikube starts.
 Start your minikube cluster.
@@ -19,7 +19,7 @@ Since, we need to launch the application externally, we would be using Nginx Ing
 
 From your CLI, type '`kubectl apply -f fleetman-ingress-nginxcontroller.yaml` and execute. As per the screenshot below, we will create an Ingress. As of now, we did not define the `TLS` tag yet..We can verify sucessfull Ingress creation by entering `kubectl get ing` in the CLI prompt.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/fleetman-ingress-nginxcontroller.jpg)
 
 <i>NB: Specify the backend service name and service  port properly.Also,ignore the `annotation` metadata tag with cert-manager, we will revisit it later.</i>
 
@@ -28,13 +28,13 @@ Execute the command `kubectl apply -f ingress-nginx-controller.yaml`. This will 
 
 Once sucessfully done,pl. revisit and verify the Ingress external IP now.. As per the screesnhot below,you can see `Address` section updated with an external IP.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG)</br>
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/fleetman-ingress-ip.JPG)</br>
 <i>NB:In your cloud enviornment, this IP is a external IP which can be accessed from outside the cluster. So,we can be reserve this IP and give a DNS name. Since, we are doing in minikube, we will not be doing anything here with the host file as we did with the manual provisioing of certificate example.one in the last example as we would want this application to be accessed externally from anywhere.Here, we will use an utility called NGROK i.e. https://ngrok.com/ </i>
 
 ## Step 5: Download Cert-Manager Certificate Issuer
 We would use a 3rd party utility i.e. Cert-Manager to issue CA signed certificates. Pl. visit https://github.com/jetstack/cert-manager. This is a very useful tool from where we can generate certificates for Staging, Production and also use Vaults as well. In this example, we are using Let's Encrypt Staging certificate for our application. This Cert-Manager will automatically provision your certificates and secrets. We need not worry anymore for expired certificates and only self signed certificates.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/high-level-overview.svg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/high-level-overview.svg)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/high-level-overview.svg](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/high-level-overview.svg)
 
 ## Step 6: Configure Cert Manager
 All resources (the CustomResourceDefinitions, cert-manager, namespace, and the webhook component) are included in a single YAML manifest file. 
@@ -47,7 +47,7 @@ Install the CustomResourceDefinitions and cert-manager itself:
 Check the `namespaces` created in the kubernetes cluster. Execute `kubectl get ns`, you might find something like below screenshot.
 You will see namespaces like `cert-manager`,`ingress-nginx` with the other namespaces.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/nslist.JPG)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/nslist.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/nslist.JPG)
 
 Once cert-manager has been deployed, you must configure Issuer or ClusterIssuer resources which represent certificate authorities.Issuer can work in multiple clusters and ClusterIssuer works in the specific cluster where it is deployed. This will be created in the cert-manager namespace. We will see in Step 8.
 
@@ -56,11 +56,11 @@ We have already seen that Kuberntes Ingress when described , it outputs external
 
 Install NGROK from https://ngrok.com/ and execute the command, `NGROK http <Address which is exposed by Ingress>`. In my case, when i did `kubectl get ing`, I got the IP as `192.168.99.100`. Once NGROK executed, you will see similar screenshot as below.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrok_capture.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrok_capture.jpg)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/ngrok_capture.jpg](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/ngrok_capture.jpg)
 
 Now,update the Ingress YAML file with the below TLS ,HOST and secret name information and apply the command `kubectl apply -f fleetman-ingress-nginxcontroller.yaml`.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/ngrokhost_ingress.jpg)
 
 NB: We see that as per my NGROK capture , host name is coming as <i>fbe0de55e3bf.ngrok.io</i>. But this will be different when you execute ngrok.We also see that we have given a random secret name <i>fleetman-webapp-secret</i>.But at this point, there is no certificate and secret created.
 
@@ -70,14 +70,14 @@ If you describe your certificate you will see `fleetman-webapp-secret` certifica
 
 In my lab,when i describe my certificate and secret which are automatically provisioned,i get the below screenshot
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert1.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert1.jpg)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/cert1.jpg](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/cert1.jpg)
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert2.jpg](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/cert2.jpg)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/cert2.jpg](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/cert2.jpg)
 
 # Step 9. Launch your CA signed HTTPS application in the browser.
 Launch the browser and open the url and type the IP which is genereated when we executed the ngrok command. Or, you can find the external IP from your secret as well..In our case we are launching the browser with `https://05408122f22a.ngrok.io`
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/kubernetesApp.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/letsencryptCertWithIngress/kubernetesApp.JPG)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/kubernetesApp.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/letsencryptCertWithIngress/kubernetesApp.JPG)
 
 In this example, we have seen how we can atutomatically provision a CA trusted signed certificate in both MiniKube and Cloud World.{<i>In Cloud World,we do not use NGROK,we reserve the IP generated by Kubernetes Ingress.</i>}
 
