@@ -3,7 +3,7 @@ In this section, We will see you how we can  leverage K8 Ingress and we can laun
 
 ## Step 1: Launch minikube cluster with addons Ingress.
 Check whether the minikube Ingress is enabled by default. Type `minikube addons list`, 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/minikube_addon_list.JPG)
 
 If they are not enabled by default,execute this command `minikube addons enable ingress`. This will enable the minikube Ingress when minikube starts.
 Start your minikube cluster.
@@ -17,7 +17,7 @@ We see that fleetman-webapp service has ClusterIP configured, so we can expose t
 ## Step 3: Configure your K8 Ingress
 We create an Kubernetes Ingress YAML file which will configure the backend service and port. The Ingress external IP will be the same as `minikube ip`. We have given a DNS name "fleetman-webapp.com" here. Update the hosts file `\etc\hosts\`  with the IP{same as minikube ip} and this DNS{fleetman-webapp.com} name.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/K8Ingress.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/K8Ingress.JPG)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/K8Ingress.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/K8Ingress.JPG)
 
 NB: Specify the backend service name and service  port properly.
 
@@ -41,7 +41,7 @@ This will create a secret named as <i> fleetman-webapp-secret </i>. You can conf
 Once, the secret is created, we need to configure our existing Ingress(<i> fleetman-ingress.yaml </i> so that application can listen in 443 secured port.
 We need to edit our existing yaml by introducing the below lines.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/Ingress.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/Ingress.JPG)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/Ingress.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/Ingress.JPG)
 
 If you see the screenshot above, we have mentioned <i> fleetman-webapp-secret </i> in the <i> <tls>..</i> section.Once changes are done, execute
 `kubectl apply -f fleetman-ingress.yaml ` to apply the Ingress in our minikube cluster.
@@ -49,7 +49,7 @@ If you see the screenshot above, we have mentioned <i> fleetman-webapp-secret </
 ## Step 9. Launch your application in the browser.
 Launch the browser and open the url <i> https://fleetman-webapp.com </i>. You will see your Kubernetes Application is launched in HTTPs mode.
 
-![https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/kubernetesApp.JPG](https://github.com/jchowdhary/k8IngressWithCerts/blob/master/selfsignedCertWithIngress/kubernetesApp.JPG)
+![https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/kubernetesApp.JPG](https://github.com/jchowdhary/CertificateProvisionInK8Cluster/blob/master/selfsignedCertWithIngress/kubernetesApp.JPG)
 
 In this example, we have seen how we can manually introduce a self signed certificate in our Kubernetes Application.
 
